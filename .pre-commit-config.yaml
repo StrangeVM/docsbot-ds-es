@@ -1,0 +1,38 @@
+# Configuración de pre-commit hooks.
+# Se ejecutan automáticamente antes de cada `git commit`.
+# Docs: https://pre-commit.com
+
+repos:
+  # Hooks básicos: limpieza de archivos.
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace          # quita espacios al final de líneas
+      - id: end-of-file-fixer             # asegura un \n al final de cada archivo
+      - id: check-yaml                    # valida sintaxis de YAMLs
+      - id: check-toml                    # valida sintaxis de TOMLs
+      - id: check-added-large-files       # bloquea archivos > 500KB
+        args: ['--maxkb=500']
+      - id: check-merge-conflict          # detecta marcadores <<< === >>>
+      - id: check-case-conflict           # detecta archivos cuyos nombres difieren solo en mayúsculas
+      - id: detect-private-key            # detecta llaves privadas accidentales
+
+  # Ruff: linter + formatter.
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.7.4
+    hooks:
+      - id: ruff                          # corre el linter, --fix arregla lo que puede
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format                   # corre el formatter
+
+# Opciones globales.
+default_language_version:
+  python: python3.14
+
+# No corre estos hooks en archivos generados.
+exclude: |
+  (?x)^(
+      uv\.lock|
+      \.venv/.*|
+      data/.*
+  )$
