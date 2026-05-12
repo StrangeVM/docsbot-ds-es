@@ -1,0 +1,69 @@
+name: CI
+
+# Cuándo se dispara este pipeline.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Permisos mínimos necesarios (principio de menor privilegio).
+permissions:
+  contents: read
+
+# Cancela ejecuciones anteriores si pusheas algo nuevo a la misma rama/PR.
+# Ahorra minutos de CI y evita que un PR muestre el estado de un commit viejo.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+
+    # Matrix: corre los tests en múltiples versiones de Python en paralelo.
+    # Esto detecta incompatibilidades antes de que los usuarios las sufran.
+    strategy:
+      fail-fast: false  # si una versión falla, las otras siguen corriendo
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      # 1. Bajar el código del repo al runner.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Instalar uv con cache automático.
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      # 3. Setup de la versión de Python correspondiente.
+      - name: Set up Python ${{ matrix.python-version }}
+        run: uv python install ${{ matrix.python-version }}
+
+      # 4. Instalar dependencias (incluyendo dev).
+      - name: Install dependencies
+        run: uv sync --all-extras
+
+      # 5. Linting con ruff.
+      - name: Lint with ruff
+        run: |
+          uv run ruff check . --output-format=github
+          uv run ruff format --check .
+
+      # 6. Tests con coverage.
+      - name: Run tests
+        run: uv run pytest --cov --cov-report=xml --cov-report=term
+
+      # 7. Subir coverage a Codecov
+      - name: Upload coverage to Codecov
+        if: matrix.python-version == '3.12'
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./coverage.xml
+          fail_ci_if_error: false  # no rompemos CI si Codecov falla
+        continue-on-error: true
