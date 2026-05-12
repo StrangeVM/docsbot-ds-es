@@ -1,6 +1,8 @@
 # docsbot-ds-es
 
 > Sistema RAG en español para Q&A sobre documentación de Pandas, scikit-learn y NumPy.
+[![CI](https://github.com/StrangeVM/docsbot-ds-es/actions/workflows/ci.yml/badge.svg)](https://github.com/StrangeVM/docsbot-ds-es/actions/workflows/ci.yml)
+[![pre-commit](https://github.com/StrangeVM/docsbot-ds-es/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/StrangeVM/docsbot-ds-es/actions/workflows/pre-commit.yml)
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
