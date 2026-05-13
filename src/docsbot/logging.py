@@ -68,7 +68,7 @@ def setup_logging(
         logger.add(
             log_file,
             format=(
-                "{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | " "{name}:{function}:{line} | {message}"
+                "{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function}:{line} | {message}"
             ),
             level=level,
             rotation="10 MB",
