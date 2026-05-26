@@ -62,7 +62,7 @@ jobs:
       # 7. Subir coverage a Codecov
       - name: Upload coverage to Codecov
         if: matrix.python-version == '3.12'
-        uses: codecov/codecov-action@v5.0.7
+        uses: codecov/codecov-action@v6.0.1
         with:
           files: ./coverage.xml
           fail_ci_if_error: false  # no rompemos CI si Codecov falla
