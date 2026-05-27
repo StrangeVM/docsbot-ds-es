@@ -27,7 +27,7 @@ repos:
 
 # Opciones globales.
 default_language_version:
-  python: python3.14
+  python: python3.12
 
 # No corre estos hooks en archivos generados.
 exclude: |
