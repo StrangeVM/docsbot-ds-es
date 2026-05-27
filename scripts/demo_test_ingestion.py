@@ -51,7 +51,7 @@ def main() -> None:
         if text:
             successful_pages += 1
 
-    print(f"\nSuccessfully processed " f"{successful_pages}/{len(downloaded_files)} pages.")
+    print(f"\nSuccessfully processed {successful_pages}/{len(downloaded_files)} pages.")
 
 
 if __name__ == "__main__":

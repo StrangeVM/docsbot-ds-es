@@ -23,7 +23,7 @@ class Embedder:
                 ("cpu" or "cuda").
         """
 
-        logger.info(f"Loading embedding model " f"{model_name} on {device}...")
+        logger.info(f"Loading embedding model {model_name} on {device}...")
 
         self.model = SentenceTransformer(
             model_name,
@@ -34,7 +34,7 @@ class Embedder:
 
         logger.info("Embedding model loaded successfully.")
 
-        logger.info(f"Embedding dimension: " f"{self.embedding_dim}")
+        logger.info(f"Embedding dimension: {self.embedding_dim}")
 
     def embed_texts(
         self,
@@ -63,7 +63,7 @@ class Embedder:
                 dtype=np.float32,
             )
 
-        logger.info(f"Generating embeddings for " f"{len(texts)} texts...")
+        logger.info(f"Generating embeddings for {len(texts)} texts...")
 
         embeddings = self.model.encode(
             texts,
@@ -74,7 +74,7 @@ class Embedder:
 
         logger.info("Finished generating embeddings.")
 
-        logger.info(f"Embeddings shape: " f"{embeddings.shape}")
+        logger.info(f"Embeddings shape: {embeddings.shape}")
 
         return embeddings
 
