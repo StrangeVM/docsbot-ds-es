@@ -13,3 +13,4 @@ Format: [Michael Nygard's template](https://github.com/joelparkerhenderson/archi
 | # | Title | Status | Date |
 |---|---|---|---|
 | [0001](./0001-package-management-with-uv.md) | Package management with uv | Accepted | 2026-05-13 |
+| 0002 | RAG Pipeline Architecture for Pandas Documentation | Accepted | 2026-06-02 |
