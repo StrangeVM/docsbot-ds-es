@@ -24,7 +24,10 @@ def parse_html_file(html_path: Path) -> dict[str, str]:
 
     html_content = html_path.read_text(encoding="utf-8")
 
-    soup = BeautifulSoup(html_content, "lxml")
+    soup = BeautifulSoup(
+        html_content,
+        "lxml",
+    )
 
     main_content = soup.find(
         "article",
@@ -52,7 +55,11 @@ def parse_html_file(html_path: Path) -> dict[str, str]:
         strip=True,
     )
 
-    text = re.sub(r"\s+", " ", text)
+    text = re.sub(
+        r"\s+",
+        " ",
+        text,
+    )
 
     return {
         "title": title,
