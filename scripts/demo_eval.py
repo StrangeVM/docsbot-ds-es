@@ -34,12 +34,10 @@ def average_metric(
     return sum(result[metric_name] for result in results) / len(results)
 
 
-def build_knowledge_base() -> (
-    tuple[
-        list[str],
-        list[dict],
-    ]
-):
+def build_knowledge_base() -> tuple[
+    list[str],
+    list[dict],
+]:
     """
     Build the knowledge base from local HTML files.
 
