@@ -81,7 +81,7 @@ def build_knowledge_base() -> (
 
         total_chunks += len(chunks)
 
-    logger.info(f"Processed {len(html_files)} files " f"into {total_chunks} chunks.")
+    logger.info(f"Processed {len(html_files)} files into {total_chunks} chunks.")
 
     return all_texts, all_metadata
 
@@ -134,20 +134,20 @@ def print_report(
     print("BASELINE RAG EVALUATION REPORT")
     print("=" * 80)
 
-    print(f"\nTotal questions evaluated: " f"{len(all_results)}")
+    print(f"\nTotal questions evaluated: {len(all_results)}")
 
     print("\nOVERALL METRICS")
     print("-" * 80)
 
-    print(f"Recall@1: " f"{overall_recall_1:.4f}")
+    print(f"Recall@1: {overall_recall_1:.4f}")
 
-    print(f"Recall@3: " f"{overall_recall_3:.4f}")
+    print(f"Recall@3: {overall_recall_3:.4f}")
 
-    print(f"Recall@5: " f"{overall_recall_5:.4f}")
+    print(f"Recall@5: {overall_recall_5:.4f}")
 
-    print(f"MRR: " f"{overall_mrr:.4f}")
+    print(f"MRR: {overall_mrr:.4f}")
 
-    print(f"Precision@5: " f"{overall_precision_5:.4f}")
+    print(f"Precision@5: {overall_precision_5:.4f}")
 
     print("\nBY LANGUAGE")
     print("-" * 80)
@@ -203,7 +203,7 @@ def main() -> None:
 
     eval_dataset = json.loads(eval_path.read_text(encoding="utf-8"))
 
-    logger.info(f"Loaded {len(eval_dataset)} " f"evaluation questions.")
+    logger.info(f"Loaded {len(eval_dataset)} evaluation questions.")
 
     logger.info("Building knowledge base...")
 
@@ -213,7 +213,7 @@ def main() -> None:
 
     embedder = Embedder()
 
-    logger.info("Generating embeddings " "for all chunks...")
+    logger.info("Generating embeddings for all chunks...")
 
     embeddings = embedder.embed_texts(all_texts)
 
@@ -227,7 +227,7 @@ def main() -> None:
         metadata=all_metadata,
     )
 
-    logger.info(f"Vector store contains " f"{len(store)} chunks.")
+    logger.info(f"Vector store contains {len(store)} chunks.")
 
     logger.info("Starting evaluation...")
 
@@ -239,7 +239,7 @@ def main() -> None:
         language = item["language"]
         question_type = item["type"]
 
-        logger.info(f"Evaluating question: " f"{question}")
+        logger.info(f"Evaluating question: {question}")
 
         query_embedding = embedder.embed_query(question)
 
@@ -307,7 +307,7 @@ def main() -> None:
         encoding="utf-8",
     )
 
-    logger.info(f"Saved evaluation results to " f"{output_path}")
+    logger.info(f"Saved evaluation results to {output_path}")
 
     print_report(all_results)
 

@@ -38,7 +38,7 @@ class NumpyVectorStore:
         """
 
         if not (len(embeddings) == len(texts) == len(metadata)):
-            raise ValueError("Embeddings, texts, and metadata " "must have the same length.")
+            raise ValueError("Embeddings, texts, and metadata must have the same length.")
 
         if self.embeddings is None:
             self.embeddings = embeddings
@@ -49,7 +49,7 @@ class NumpyVectorStore:
         self.texts.extend(texts)
         self.metadata.extend(metadata)
 
-        logger.info(f"Added {len(texts)} documents. " f"Store now contains {len(self)} documents.")
+        logger.info(f"Added {len(texts)} documents. Store now contains {len(self)} documents.")
 
     def search(
         self,

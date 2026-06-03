@@ -158,9 +158,9 @@ def main() -> None:
 
             print(f"Score: {result['score']:.4f}")
 
-            print(f"Title: " f"{result['metadata']['title']}")
+            print(f"Title: {result['metadata']['title']}")
 
-            print(f"Source: " f"{result['metadata']['source_url']}")
+            print(f"Source: {result['metadata']['source_url']}")
 
             chunk_text_preview = result["text"]
 
